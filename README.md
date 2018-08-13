@@ -56,6 +56,9 @@
  - 服务高可用，当 Jenkins Master 出现故障时，Kubernetes 会自动创建一个新的 Jenkins Master 容器，并且将 Volume 分配给新创建的容器，保证数据不丢失，从而达到集群服务高可用。
  - 动态伸缩，合理使用资源，每次运行 Job 时，会自动创建一个 Jenkins Slave，Job 完成后，Slave 自动注销并删除容器，资源自动释放，而且 Kubernetes 会根据每个资源的使用情况，动态分配 Slave 到空闲的节点上创建，降低出现因某节点资源利用率高，还排队等待在该节点的情况。
  - 扩展性好，当 Kubernetes 集群的资源严重不足而导致 Job 排队等待时，可以很容易的添加一个 Kubernetes Node 到集群中，从而实现扩展。
+ ### 缺点
+ jnlp-slave pod 无法删除
+因为我们执行构建后，如果 jnlp-slave pod创建失败，它会不断的尝试创建新的pod，并试图连接jenkins，一段时间后，就会创造很多失败的jnlp-slave pod。如果遇到这种情况，需要尽早中断任务并删除失败的pod。（需要手动删除jnlp-slave pod）
  ### 沟通交流
 
  k8s-CICD-Pipeline交流群:18876939 欢迎喜欢交流的朋友加入！
