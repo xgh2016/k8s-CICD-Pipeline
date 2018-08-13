@@ -8,7 +8,7 @@
 ### k8s Jenkins构建持续集成流程
  ![k8s](./ps/4.png)
  ### Docker技术这些应用场景
- https://blog.csdn.net/xiegh2014/article/details/80456486
+ 参考文档:https://blog.csdn.net/xiegh2014/article/details/80456486
  ### 部署准备
  ```
  pass
