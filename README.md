@@ -10,9 +10,9 @@
  ### Docker技术这些应用场景
  https://blog.csdn.net/xiegh2014/article/details/80456486
  ### 安装步骤
- '''
+ ```
  kubectl create namespace kube-jenkins
- '''
+ ```
  ### 传统CICD存在的问题
  Jenkins 安装完成了，接下来我们不用急着就去使用，我们要了解下在 Kubernetes 环境下面使用 Jenkins 有什么好处。
 
