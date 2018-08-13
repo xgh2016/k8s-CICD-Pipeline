@@ -9,4 +9,4 @@ Pipeline 介绍
 
 ## 沟通交流
 
-k8s-CICD-Pipeline交流群:13359370 欢迎喜欢交流的朋友加入！
+k8s-CICD-Pipeline交流群:18876939 欢迎喜欢交流的朋友加入！
