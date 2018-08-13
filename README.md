@@ -11,21 +11,23 @@
  参考文档:https://blog.csdn.net/xiegh2014/article/details/80456486
  ### 部署准备
  ```
+ gogs代码管理
+ git服务器安装参考：https://blog.csdn.net/xiegh2014/article/details/81434421
  持久化存储
  NFS安装
-1、使用yum源安装
-yum -y install nfs-utils -y
-vim /etc/exports
-/data/nfs *(rw,no_root_squash)
-2、启动nfs服务
-开机启动
-systemctl enable rpcbind.service
-systemctl enable nfs-server.service
-启动nfs服务
-systemctl start rpcbind.service
-systemctl start nfs-server.service
-3、检查 NFS 服务器端是否有目录共享
-showmount -e 192.168.58.110
+ 1、使用yum源安装
+ yum -y install nfs-utils -y
+ vim /etc/exports
+ /data/qas *(rw,no_root_squash)
+ 2、启动nfs服务
+ 开机启动
+ systemctl enable rpcbind.service
+ systemctl enable nfs-server.service
+ 启动nfs服务
+ systemctl start rpcbind.service
+ systemctl start nfs-server.service
+ 3、检查 NFS 服务器端是否有目录共享
+ showmount -e 192.168.58.110
  
  GlusterFS集群安装参考文档：http://blog.51cto.com/passed/2139299
  ```
