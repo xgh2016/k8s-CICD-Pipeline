@@ -5,14 +5,28 @@
  在开始我们的工作之前，让我们花一点时间分析开始使用Jenkins使用Kubernetes容器所需的工作流。Kubernetes对于开发者来说是一个惊人的开源容器编排引擎。Kubernetes是由Google发起的，这使Kubernetes在使用多个开源容器项目方面有一个惊人的优势。默认情况下，Docker更受Kubernetes的使用者支持和青睐。使用Docker容器的工作流程如下图所示：
 
  ![k8s](./ps/0.jpg)
-### k8s Jenkins构建持续集成流程
+ ### k8s Jenkins构建持续集成流程
  ![k8s](./ps/4.png)
  ### Docker技术这些应用场景
  参考文档:https://blog.csdn.net/xiegh2014/article/details/80456486
  ### 部署准备
  ```
  持久化存储
- NFS安装参考文档:http://blog.51cto.com/10880347
+ NFS安装
+1、使用yum源安装
+yum -y install nfs-utils -y
+vim /etc/exports
+/data/nfs *(rw,no_root_squash)
+2、启动nfs服务
+开机启动
+systemctl enable rpcbind.service
+systemctl enable nfs-server.service
+启动nfs服务
+systemctl start rpcbind.service
+systemctl start nfs-server.service
+3、检查 NFS 服务器端是否有目录共享
+showmount -e 192.168.58.110
+ 
  GlusterFS集群安装参考文档：http://blog.51cto.com/passed/2139299
  ```
  ### 安装步骤
