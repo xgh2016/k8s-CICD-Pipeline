@@ -6,6 +6,3 @@ Pipeline 介绍
 在开始我们的工作之前，让我们花一点时间分析开始使用Jenkins使用Kubernetes容器所需的工作流。Kubernetes对于开发者来说是一个惊人的开源容器编排引擎。Kubernetes是由Google发起的，这使Kubernetes在使用多个开源容器项目方面有一个惊人的优势。默认情况下，Docker更受Kubernetes的使用者支持和青睐。使用Docker容器的工作流程如下图所示：
 
 ![k8s](./ps/0.jpg)
-![k8s](./ps/1.jpg)
-![k8s](./ps/2.jpg)
-![k8s](./ps/3.jpg)
