@@ -1,2 +1,2 @@
 # k8s-CICD-Pipeline
-![docker](./ps/1.jpg)
+![k8s](./ps/1.jpg)
