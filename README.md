@@ -7,7 +7,7 @@ Pipeline 介绍
 
 ![k8s](./ps/0.jpg)
 
-## 安装步骤
+### 安装步骤
 
 ### 优点
 Jenkins 安装完成了，接下来我们不用急着就去使用，我们要了解下在 Kubernetes 环境下面使用 Jenkins 有什么好处。
