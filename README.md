@@ -18,9 +18,9 @@
  ```
  kubectl create namespace kube-jenkins
  创建PVC对象：
- kubectl create -f 
+ kubectl create -f jenkins-pvc.yaml
  创建rbac相关的资源对象:
- kubectl create -f 
+ kubectl create -f jenkins-rbac.yaml
  创建Jenkins服务:
  kubectl create -f jenkins.yaml
  ```
