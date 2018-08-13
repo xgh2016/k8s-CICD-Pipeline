@@ -58,7 +58,7 @@
  - 扩展性好，当 Kubernetes 集群的资源严重不足而导致 Job 排队等待时，可以很容易的添加一个 Kubernetes Node 到集群中，从而实现扩展。
  ### 缺点
  jnlp-slave pod 无法删除
-因为我们执行构建后，如果 jnlp-slave pod创建失败，它会不断的尝试创建新的pod，并试图连接jenkins，一段时间后，就会创造很多失败的jnlp-slave pod。如果遇到这种情况，需要尽早中断任务并删除失败的pod。（需要手动删除jnlp-slave pod）
+ 如果 jnlp-slave pod创建失败，它会不断的尝试创建新的pod，并试图连接jenkins，一段时间后，就会创造很多失败的jnlp-slave pod。如果遇到这种情况，需  要尽早中断任务并删除失败的pod。（需要手动删除jnlp-slave pod）
  ### 沟通交流
 
  k8s-CICD-Pipeline交流群:18876939 欢迎喜欢交流的朋友加入！
