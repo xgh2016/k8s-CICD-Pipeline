@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+ name: opspv
+spec:
+ capacity:
+   storage: 20Gi
+ accessModes:
+ - ReadWriteMany
+ persistentVolumeReclaimPolicy: Delete
+ nfs:
+   server: 172.16.8.48
+   path: /data/qas
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+ name: opspvc
+ namespace: kube-ops
+spec:
+ accessModes:
+   - ReadWriteMany
+ resources:
+   requests:
+     storage: 20Gi
