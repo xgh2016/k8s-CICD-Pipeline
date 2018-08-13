@@ -11,11 +11,13 @@
  参考文档:https://blog.csdn.net/xiegh2014/article/details/80456486
  ### 部署准备
  ```
- pass
+ 持久化存储
+ NFS安装参考文档:http://blog.51cto.com/10880347
+ GlusterFS集群安装参考文档：http://blog.51cto.com/passed/2139299
  ```
  ### 安装步骤
- 创建namespace命名空间:
  ```
+ 创建namespace命名空间:
  kubectl create namespace kube-jenkins
  创建PVC对象：
  kubectl create -f jenkins-pvc.yaml
