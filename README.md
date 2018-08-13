@@ -13,6 +13,9 @@
  ```
  gogs代码管理
  git服务器安装参考：https://blog.csdn.net/xiegh2014/article/details/81434421
+ 
+ Harbor镜像管理
+ 
  持久化存储
  NFS安装
  1、使用yum源安装
