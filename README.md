@@ -10,8 +10,9 @@
  ### Docker技术这些应用场景
  https://blog.csdn.net/xiegh2014/article/details/80456486
  ### 部署准备
+ ```
  pass
- pass
+ ```
  ### 安装步骤
  ```
  kubectl create namespace kube-jenkins
