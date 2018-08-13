@@ -1,2 +1,2 @@
 # k8s-CICD-Pipeline
-(./ps/1.jpg)
+!(./ps/1.jpg)
