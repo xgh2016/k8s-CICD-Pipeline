@@ -1,5 +1,5 @@
 
-获取/root/.kube/config中client-certificate-data和client-key-data的内容并转化成base64 encoded文件
+
 
 certificate-authority-data:
 
