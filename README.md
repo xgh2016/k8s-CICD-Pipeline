@@ -45,6 +45,8 @@
  创建Jenkins服务:
  kubectl create -f jenkins.yaml
  ```
+ ### 离线包下载
+      链接：https://share.weiyun.com/5pCfEWm 密码：kq3dwn
  ### 传统CICD存在的问题
  Jenkins 安装完成了，接下来我们不用急着就去使用，我们要了解下在 Kubernetes 环境下面使用 Jenkins 有什么好处。
 
