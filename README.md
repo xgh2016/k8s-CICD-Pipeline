@@ -45,6 +45,23 @@
  创建Jenkins服务:
  kubectl create -f jenkins.yaml
  ```
+ ### 测试
+ ```
+ node {
+   stage(' git仓库拉代码') { // for display purposes
+        sh "echo 'git checkout'"
+   }
+   stage('构建代码') {
+        sh "echo 'Build...'"
+   }
+   stage('自动化测试') {
+        sh "echo 'deploy...'"
+   }
+   stage('发布代码K8S') {
+        sh "echo 'deploy...'"
+   }
+}
+ ```
  ### 离线包下载
       链接：https://share.weiyun.com/5pCfEWm 密码：kq3dwn
  ### 传统CICD存在的问题
