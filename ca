@@ -5,3 +5,38 @@ echo | base64 -d > /opt/client.key
 
 openssl pkcs12 -export -out /opt/cert.pfx -inkey /opt/client.key -in /opt/client.crt -certfile /opt/ca.crt
 
+
+
+
+podTemplate(label: 'jnlp-slave', cloud: 'kubernetes',containers: [
+    containerTemplate(
+        name: 'jnlp',
+        image: '172.16.8.49/qas/jenkins-slave',
+        alwaysPullImage: true
+    ),
+  ],
+  volumes: [
+    hostPathVolume(mountPath: '/run/docker.sock',hostPath: '/run/docker.sock'),
+    hostPathVolume(mountPath: '/opt/kube/bin/docker',hostPath: '/opt/kube/bin/docker'),
+    hostPathVolume(mountPath: '/usr/local/jdk',hostPath: '/usr/local/jdk'),
+    hostPathVolume(mountPath: '/usr/local/maven',hostPath: '/usr/local/maven'),
+  ],
+  imagePullSecrets: ['registry-pull-secret'],
+)
+{
+node('jnlp-slave') {
+    stage('Clone') {
+      echo "1.Clone Stage"
+    }
+    stage('Test') {
+      echo "2.Test Stage"
+    }
+    stage('Build') {
+      echo "3.Build Stage"
+    }
+    stage('Deploy') {
+      echo "4. Deploy Stage"
+    }
+}
+}
+
