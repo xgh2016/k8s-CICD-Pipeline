@@ -66,6 +66,9 @@
       链接：https://share.weiyun.com/5pCfEWm 密码：kq3dwn
       链接：https://share.weiyun.com/5pf0e0G 密码：pejdye
       链接：https://share.weiyun.com/5m4ADMk 密码：x4uh4c
+      
+      
+ openssl pkcs12 -export -out admin.pfx -inkey admin-key.pem -in admin.pem -certfile ca.pem
  ### 传统CICD存在的问题
  Jenkins 安装完成了，接下来我们不用急着就去使用，我们要了解下在 Kubernetes 环境下面使用 Jenkins 有什么好处。
 
