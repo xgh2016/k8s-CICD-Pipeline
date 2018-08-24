@@ -80,3 +80,28 @@ COPY slave.jar /usr/share/jenkins/slave.jar
 COPY jenkins-slave /usr/bin/jenkins-slave
 
 ENTRYPOINT ["jenkins-slave"]
+
+
+podTemplate(label: 'jnlp-slave', cloud: 'kubernetes',containers: [
+    containerTemplate(
+        name: 'jnlp',
+        image: '172.16.8.49/qas/jenkins-slave',
+        alwaysPullImage: true
+    ),
+  ],
+  volumes: [
+    hostPathVolume(mountPath: '/run/docker.sock',hostPath: '/run/docker.sock'),
+    hostPathVolume(mountPath: '/opt/kube/bin/docker',hostPath: '/opt/kube/bin/docker'),
+    hostPathVolume(mountPath: '/usr/local/jdk',hostPath: '/usr/local/jdk'),
+    hostPathVolume(mountPath: '/usr/local/maven',hostPath: '/usr/local/maven'),
+  ],
+  imagePullSecrets: ['registry-pull-secret'],
+)
+{
+  node("jnlp-slave"){
+      stage('Git代码拉取'){
+           checkout([$class: 'GitSCM', branches: [[name: '${Tag}']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [],userRemoteConfigs: [[credentialsId: '22dbd160-e94d-4cae-a0e5-f54a40707188', url: 'root@172.16.8.45:devops/solo.git']]])
+ } 
+stage('SonarQube'){
+      echo "Testing..."
+ }
