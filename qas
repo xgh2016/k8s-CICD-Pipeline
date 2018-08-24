@@ -105,3 +105,12 @@ podTemplate(label: 'jnlp-slave', cloud: 'kubernetes',containers: [
 stage('SonarQube'){
       echo "Testing..."
  }
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: registry-pull-secret
+  namespace: default
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSIxMC4yMDYuMjQwLjE4OCI6IHsKCQkJImF1dGgiOiAiYkdsNmFHVnViR2xoYm1jNk5GbFdTbVJDTUhBME9ITmFlSEJOWnc9PSIKCQl9Cgl9LAoJIkh0dHBIZWFkZXJzIjogewoJCSJVc2VyLUFnZW50IjogIkRvY2tlci1DbGllbnQvMTguMDMuMS1jZSAobGludXgpIgoJfQp9 
+type: kubernetes.io/dockerconfigjson
