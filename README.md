@@ -66,6 +66,7 @@
       链接：https://share.weiyun.com/5pCfEWm 密码：kq3dwn
       链接：https://share.weiyun.com/5pf0e0G 密码：pejdye
       链接：https://share.weiyun.com/5m4ADMk 密码：x4uh4c
+      链接：https://share.weiyun.com/5FFbM3B 密码：y4fcff
       
       
  openssl pkcs12 -export -out admin.pfx -inkey admin-key.pem -in admin.pem -certfile ca.pem
