@@ -10,3 +10,221 @@ git remote rm origin
 git remote add origin git@192.168.1.18:mStar/OTT-dual/K3S/supernova
 
 链接：https://share.weiyun.com/5aPD4z7 密码：ixuv47
+
+#!/bin/bash
+#node
+group1="172.16.8.11 172.16.8.12"
+group2="172.16.8.13 172.16.8.14"
+#deloy
+tomcat1_dir=/app/tomcat1
+tomcat2_dir=/app/tomcat2
+tomcat3_dir=/app/tomcat3
+tomcat4_dir=/app/tomcat4
+#BACKUP
+backup_dir1=/app/backup1
+backup_dir2=/app/backup2
+backup_dir3=/app/backup3
+backup_dir4=/app/backup4
+
+TMP_DIR1=/app/deploy1
+TMP_DIR2=/app/deploy2
+TMP_DIR3=/app/deploy3
+TMP_DIR4=/app/deploy4
+
+CTIME=$(date +"%H-%M-%S")
+DATE=$(date "+%Y-%m-%d")
+
+SHELL_NAME="deploy.sh"
+SHELL_LOG="/app/${SHELL_NAME}.log" 
+DATE_N="$(date +'%Y%m%d%H%M%S')"
+USER_N=`whoami`
+echo " ${DATE_N} ${USER_N} execute $0 [INFO] $@" >>${SHELL_LOG}
+
+ghsmp_deploy_group1 (){
+      DEPLOY=$1
+      tomcat_dir=$2
+      if [ $DEPLOY = "deploy1" ]; then
+         scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR1 
+         for node in $group1;do
+             if [ $tomcat_dir = "$tomcat1_dir" ];then
+                  ssh $node  "/app/tomcat1/bin/shutdown.sh" 
+                  ssh $node mkdir $backup_dir1/$DATE 
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir1/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR1}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat1/bin/startup.sh"
+             else
+               echo "${node} TOMCAT1 DEPLOY Failed!"
+               cat TOMCAT4_DEPLOY_Failed?              
+             fi
+         done  
+      
+      elif [ $DEPLOY = "deploy2" ]; then 
+           scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR2
+           for node in $group1;do
+               if [ $tomcat_dir = "$tomcat2_dir" ];then
+                  ssh $node  "/app/tomcat2/bin/shutdown.sh"
+                  ssh $node mkdir $backup_dir2/$DATE
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir2/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR2}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat2/bin/startup.sh"
+              else 
+               echo "${node} TOMCAT2 DEPLOY Failed!"
+                cat TOMCAT4_DEPLOY_Failed?
+              fi
+          done
+
+      elif [ $DEPLOY = "deploy3" ]; then    
+         scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR3
+          for node in $group1;do
+               if [ $tomcat_dir = "$tomcat3_dir" ];then
+                  ssh $node  "/app/tomcat3/bin/shutdown.sh"
+                  ssh $node mkdir $backup_dir3/$DATE
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir3/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR3}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat3/bin/startup.sh"
+              else  
+               echo "${node} TOMCAT3 DEPLOY Failed!"
+               cat TOMCAT4_DEPLOY_Failed?
+              fi    
+          done 
+      elif [ $DEPLOY = "deploy4" ]; then
+         scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR4
+         for node in $group1;do
+               if [ $tomcat_dir = "$tomcat4_dir" ];then
+                  ssh $node  "/app/tomcat4/bin/shutdown.sh"
+                  ssh $node mkdir $backup_dir4/$DATE
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir4/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR4}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat4/bin/startup.sh"
+              else  
+               echo "${node} TOMCAT1 DEPLOY Failed!"
+		cat TOMCAT4_DEPLOY_Failed?
+              fi 
+          done
+
+        else
+        echo "DEPLOY ERROR"
+        fi
+}
+ghsmp_deploy_group2 (){
+      DEPLOY=$1
+      tomcat_dir=$2
+      if [ $DEPLOY = "deploy1" ]; then
+         scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR1 
+              
+         for node in $group2;do
+             if [ $tomcat_dir = "$tomcat1_dir" ];then
+                  ssh $node  "/app/tomcat1/bin/shutdown.sh" 
+                  ssh $node mkdir $backup_dir1/$DATE 
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir1/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR1}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat1/bin/startup.sh"
+             else
+               echo "TOMCAT1 DEPLOY ERROR?"
+	       cat TOMCAT4_DEPLOY_Failed?
+             fi
+         done  
+      
+      elif [ $DEPLOY = "deploy2" ]; then 
+           scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR2
+           for node in $group2;do
+               if [ $tomcat_dir = "$tomcat2_dir" ];then
+                  ssh $node  "/app/tomcat2/bin/shutdown.sh"
+                  ssh $node mkdir $backup_dir2/$DATE
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir2/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR2}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat2/bin/startup.sh"
+              else
+                echo "TOMCAT2 DEPLOY ERROR?"
+		cat TOMCAT4_DEPLOY_Failed?
+              fi
+          done
+
+      elif [ $DEPLOY = "deploy3" ]; then    
+         scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR3
+          for node in $group2;do
+               if [ $tomcat_dir = "$tomcat3_dir" ];then
+                  ssh $node  "/app/tomcat3/bin/shutdown.sh"
+                  ssh $node mkdir $backup_dir3/$DATE
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir3/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR3}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat3/bin/startup.sh"
+              else
+               echo "TOMCAT3 DEPLOY ERROR?"
+	       cat TOMCAT4_DEPLOY_Failed?
+              fi    
+          done 
+      elif [ $DEPLOY = "deploy4" ]; then
+         scp  -r root@172.16.8.67:/app/$DEPLOY/* $TMP_DIR4
+         for node in $group2;do
+               if [ $tomcat_dir = "$tomcat4_dir" ];then
+                  ssh $node  "/app/tomcat4/bin/shutdown.sh"
+                  ssh $node mkdir $backup_dir4/$DATE
+                  ssh $node mv $tomcat_dir/webapps/* $backup_dir4/$DATE
+                  ssh $node rm -rf  $tomcat_dir/webapps/*
+                  scp -r ${TMP_DIR4}/* $node:$tomcat_dir/webapps
+                  ssh $node unzip $tomcat_dir/webapps/*.zip -d $tomcat_dir/webapps/
+                  ssh $node "cp -rf $tomcat_dir/webapps/config/* $tomcat_dir/webapps/ROOT/WEB-INF/classes/"
+                  ssh $node rm -rf $tomcat_dir/webapps/*.zip
+                  ssh $node  "/app/tomcat4/bin/startup.sh"
+                  echo "${node} deploy success!"
+              else
+                 echo "${node} TOMCAT4 DEPLOY ERROR!"
+                 cat TOMCAT4_DEPLOY_Failed? 
+              fi 
+          done
+
+        else
+        echo "DEPLOY ERROR"
+        fi
+}
+
+rollback_fun(){ 
+    for node in $ROLLBACK_LIST;do 
+        ssh $node "rm -f /webroot/web-demo && ln -s /opt/webroot/$1 /webroot/web-demo" 
+        echo "${node} rollback success!"
+        done
+}
+
+main(){
+	case $1 in
+		 deploy_group1)
+	             ghsmp_deploy_group1 $2 $3;
+		         ;;
+                 deploy_group2)
+                    ghsmp_deploy_group2 $2 $3;
+                         ;;                        
+		*)
+	       echo $"Usage: $0 {deploy_group1|deploy_group2|ghsmp_rollback}"
+	esac
+}
+
+main $1 $2 $3
