@@ -1,0 +1,15 @@
+ node('jenkins-k8s') {
+    stage('确认回退的版本') {
+      echo "1.Test Stage"
+	  input "请确认是否测试环境回滚到上一发布版本！"
+    }
+    stage('k8s版本回滚') {
+        echo "2.K8S-Roll-back"
+		sh '''
+		 kubectl rollout undo deployment/${Project_Name} -n ${Namespace}
+		'''   
+    }
+    stage('可用性测试') {
+      echo "3.Test Stage"
+    }
+}
