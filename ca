@@ -21,3 +21,4 @@ node {
        sh "echo 'deploy...'"
   }
 }
+http://maven.aliyun.com/nexus/content/groups/public/
